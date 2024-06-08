@@ -1,21 +1,31 @@
-# version: "4.0"
+version: "4.0"
 services:
   localstack:
     image: fetchdocker/data-takehome-localstack
+    hostname: localstack
     ports:
       - "4566:4566"
-
-
-
-
+  
   postgres:
     image: fetchdocker/data-takehome-postgres
+    hostname: postgres
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres 
-
     ports:
       - "5432:5432"
-
-
+  
+  fastapi-app:
+    build:
+      dockerfile: Dockerfile-webapp
+    ports:
+      - "8000:8000"
+    environment:
+      AWS_ACCESS_KEY_ID: dummy_access_key
+      AWS_SECRET_ACCESS_KEY: dummy_secret_key
+      AWS_SESSION_TOKEN: dummy_session_token
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+    depends_on:
+      - localstack
+      - postgres
