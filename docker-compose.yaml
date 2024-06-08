@@ -1,0 +1,21 @@
+# version: "4.0"
+services:
+  localstack:
+    image: fetchdocker/data-takehome-localstack
+    ports:
+      - "4566:4566"
+
+
+
+
+  postgres:
+    image: fetchdocker/data-takehome-postgres
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres 
+
+    ports:
+      - "5432:5432"
+
+
