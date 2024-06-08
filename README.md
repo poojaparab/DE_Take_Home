@@ -64,35 +64,35 @@ The `Dockerfile-webapp` sets up the FastAPI application environment:
 ## Questions
 
 1. **How would you deploy this application in production?**
-- Deploy the FastAPI application to a cloud provider like AWS, Azure, or Google Cloud Platform using their respective services for containers (e.g., ECS, AKS, GKE).
-- Set up a managed PostgreSQL database service for production use.
-- Use AWS SQS or a similar queue service (apache kafka, pubsub) in the chosen cloud provider for message queuing.
+    - Deploy the FastAPI application to a cloud provider like AWS, Azure, or Google Cloud Platform using their respective services for containers (e.g., ECS, AKS, GKE).
+    - Set up a managed PostgreSQL database service for production use.
+    - Use AWS SQS or a similar queue service (apache kafka, pubsub) in the chosen cloud provider for message queuing.
 
 2. **What other components would you want to add to make this production ready?**
-- Implement proper logging mechanisms to track application behavior and errors.
-- Set up monitoring and alerting for application metrics and health checks.
-- Implement security measures such as encryption for data in transit and at rest.
-- Add authentication and authorization mechanisms to secure access to the application and its endpoints.
-- creating configuration files for different environments which includes all the environment variables.
+    - Implement proper logging mechanisms to track application behavior and errors.
+    - Set up monitoring and alerting for application metrics and health checks.
+    - Implement security measures such as encryption for data in transit and at rest.
+    - Add authentication and authorization mechanisms to secure access to the application and its endpoints.
+    - creating configuration files for different environments which includes all the environment variables.
 
 3. **How can this application scale with a growing dataset?**
-- Utilize auto-scaling capabilities of container orchestration platforms to dynamically adjust resources based on demand.
-- Implement sharding or partitioning strategies for the database to distribute data across multiple nodes.
-- Use distributed queue systems for handling larger volumes of messages efficiently.
+    - Utilize auto-scaling capabilities of container orchestration platforms to dynamically adjust resources based on demand.
+    - Implement sharding or partitioning strategies for the database to distribute data across multiple nodes.
+    - Use distributed queue systems for handling larger volumes of messages efficiently.
 
 4. **How can PII be recovered later on?**
-- Using hashlib.sha256 irreversibly hashes the PII data, meaning that once it's hashed, it cannot be recovered to its original form. Therefore, if you're using hashlib.sha256 to mask PII data, you won't be able to recover it later.
+    - Using hashlib.sha256 irreversibly hashes the PII data, meaning that once it's hashed, it cannot be recovered to its original form. Therefore, if you're using hashlib.sha256 to mask PII data, you won't be able to recover it later.
 
-- If you need to recover PII data later on, you would need to use encryption rather than hashing. Encryption allows for reversible transformation of data, meaning you can encrypt the PII data and then decrypt it later when needed.
+    - If you need to recover PII data later on, you would need to use encryption rather than hashing. Encryption allows for reversible transformation of data, meaning you can encrypt the PII data and then decrypt it later when needed.
 
-- Alternatives to hashlib.sha256 for masking PII data include:
-    1. Encryption algorithms: AES and RSA
-    2. Tokenization: Replace sensitive data with randomly generated tokens or pseudonyms
-    3. AWS and GCP also provides like KMS to encrypt data at rest.
+    - Alternatives to hashlib.sha256 for masking PII data include:
+        1. Encryption algorithms: AES and RSA
+        2. Tokenization: Replace sensitive data with randomly generated tokens or pseudonyms
+        3. AWS and GCP also provides like KMS to encrypt data at rest.
 
 5. **What are the assumptions you made?**
-- The application assumes that the incoming data from the SQS queue is in JSON format and follows a specific structure.
-- It assumes that the provided Docker images for local development accurately replicate the behavior of AWS SQS and PostgreSQL.
+    - The application assumes that the incoming data from the SQS queue is in JSON format and follows a specific structure.
+    - It assumes that the provided Docker images for local development accurately replicate the behavior of AWS SQS and PostgreSQL.
 
 
 ## Notes
